@@ -12,7 +12,7 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
-      
+      'axios'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -74,16 +74,31 @@ module.exports = function (/* ctx */) {
         'QParallax',
         'QToolbar',
         'QToolbarTitle',
-        'QAvatar'
+        'QAvatar',
+        'QSpace',
+        'QCarousel',
+        'QCarouselControl',
+        'QCarouselSlide',
+        'QSeparator',
+        'QMenu',
+        'QDate',
+        'QPopupProxy',
+        'QCheckbox',
+        'QDialog',
+        'QRadio',
+        'QSelect'
       ],
 
       directives: [
-        'Ripple'
+        'Ripple',
+        'ClosePopup'
       ],
 
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'Dialog',
+        'LocalStorage'
       ]
     },
 

@@ -1,82 +1,54 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header unelevated>
-      <q-toolbar class="bg-black">
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
+  <q-layout class="bg-grey-4" view="lHh Lpr Lff">
+    <q-toolbar unelevated style="height: 70px;" class="bg-red text-black-14">
+      <div class="text-h6 q-ml-lg">Ghel's Salon</div>
 
-        <q-toolbar-title>
-          Ghel's Salon
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-header> 
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8">
-          Menu
-        </q-item-label>
-        <q-item clickable active-class="active" exact v-ripple :to="{ name : 'MenuUtama'}">
-          <!-- <q-item-section avatar>
-            <q-icon name="dashboard" />
-          </q-item-section> -->
-          
-          <q-item-section>
-            Menu Utama
-          </q-item-section>
-        </q-item>
-      </q-list>
-
-      <q-list>
-        <q-item clickable active-class="active" exact v-ripple :to="{ name : 'InputPelanggan'}">
-          <q-item-section>
-            Input Data Pelanggan
-          </q-item-section>
-        </q-item>
-      </q-list>
-
-      <q-list>
-        <q-item clickable active-class="active" exact v-ripple :to="{ name : 'DaftarPelanggan'}">
-          <q-item-section>
-            Daftar Pelanggan
-          </q-item-section>
-        </q-item>
-      </q-list>
-
-      <q-list>
-        <q-item clickable active-class="active" exact v-ripple :to="{ name : 'DaftarHarga'}">
-          <q-item-section>
-            Daftar Harga
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer> -->
-
+      <q-space/>
+      <div>
+        <q-btn size="medium" @click="home()" flat>Home</q-btn>
+        <q-btn size="medium" @click="input()" flat>Input Pelanggan</q-btn>
+        <q-btn size="medium" @click="daftar()" flat>Daftar Pelanggan</q-btn>
+        <q-btn flat round>
+          <q-avatar>
+            <img src="statics/logo admin.png">
+          </q-avatar>
+          <q-menu>
+          <q-list style="min-width: 100px">
+            <q-item clickable v-close-popup>
+              <q-item-section>Admin Ghel's Salon</q-item-section>
+            </q-item>
+            <q-separator />
+            <q-item clickable v-close-popup @click="logout()">
+              <q-item-section>Logout</q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
+        </q-btn>
+      </div>
+    </q-toolbar>
     <q-page-container class="bg-grey-2">
       <router-view />
-    </q-page-container> 
+    </q-page-container>
   </q-layout>
 </template>
-
 <script>
 export default {
-  name: 'MainLayout',
   data () {
     return {
-      leftDrawerOpen: false
+    }
+  },
+  methods: {
+    home () {
+      this.$router.push({ name: 'MenuUtama' })
+    },
+    input () {
+      this.$router.push({ name: 'InputPelanggan' })
+    },
+    daftar () {
+      this.$router.push({ name: 'DaftarPelanggan' })
+    },
+    logout () {
+      this.$router.push({ name: 'login' })
     }
   }
 }

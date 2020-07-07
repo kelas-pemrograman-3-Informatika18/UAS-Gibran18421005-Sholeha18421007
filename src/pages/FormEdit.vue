@@ -3,12 +3,12 @@
     <q-page-container>
       <q-page padding>
         <div class="justify-center q-pt-xs row items-start q-gutter-md">
-          <q-card class="my-card bg-white" flat>
+          <q-card class="my-card" flat>
             <q-card-section>
-              <div class="text-h2 text-center text-weight-medium text-black q-pa-md">
+              <div class="text-h2 text-center bg-grey-3 text-weight-medium text-black q-pa-md">
                 Ghel's Salon
               </div>
-              <div class="text-h5 text-weight-light q-pt-md">Form Pemesanan</div>
+              <div class="text-h5 text-weight-light q-pt-md">Edit Pemesanan</div>
                 <q-form
                   @submit="onSubmit"
                   @reset="onReset"
@@ -49,7 +49,7 @@
                 />
 
                 <div>
-                  <q-btn label="Pesan" type="submit" color="primary"/>
+                  <q-btn label="Update" type="submit" color="primary"/>
                   <q-btn label="Reset" type="reset" color="primay" flat class="q-ml-sm" />
                 </div>
               </q-form>
@@ -72,12 +72,25 @@ export default {
       'Potong Rambut',
       'Cuci Rambut',
       'Creambath'
-    ]
+      ]
     }
   },
+  created () {
+    this.getData()
+  },
   methods: {
+    getData () {
+      this.$axios.get('pesanan/tampilsingle/' + this.$route.params.id)
+        .then(res => {
+          const data = res.data
+          this.nama = data.nama
+          this.tanggal = data.tanggal
+          this.perawatan = data.perawatan
+          this.harga = data.harga
+        })
+    },
     onSubmit () {
-      this.$axios.post('pesanan/input', {
+      this.$axios.put('pesanan/edit/' + this.$route.params.id, {
         nama: this.nama,
         tanggal: this.tanggal,
         perawatan: this.perawatan,
@@ -88,6 +101,7 @@ export default {
             type: 'positive',
             message: res.data.pesan
           })
+          this.$router.push({ name: 'DaftarPelanggan' })
         } else {
           this.$q.notify({
             type: 'negative',
